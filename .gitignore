@@ -1,0 +1,9 @@
+dist
+.vscode
+node_modules
+/test-results/
+/playwright-report/
+/playwright/.cache/
+users.csv
+existing.json
+config.json
