@@ -3,7 +3,7 @@
 Dieses Script erstellt automatisch Postfächer für die Strato-Webangebote.
 
 Zum Einrichten die `config.json` mit dem Nutzerzugang und dem Passwort ausstatten.
-Anschließend eine users.csv im Startverzeichnis erstellen nach dem Schema:
+Anschließend eine `users.csv` im Startverzeichnis erstellen nach dem Schema:
 
 ```
 "Vorname und Name",alias,vorname.name@andere_adresse.de

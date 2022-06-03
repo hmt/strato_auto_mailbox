@@ -13,6 +13,5 @@
 	"semi": true,
 	"singleQuote": false,
 	"trailingComma": "none",
-	"useTabs": true,
-	"vueIndentScriptAndStyle": true
+	"useTabs": true
 }
