@@ -18,10 +18,10 @@
   "author": "hmt",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^17.0.36",
+    "@types/node": "^18.0.0",
     "@types/papaparse": "^5.3.2",
+    "papaparse": "^5.3.2",
     "playwright": "^1.22.2",
-    "tsup": "^5.12.8",
-    "papaparse": "^5.3.2"
+    "tsup": "^6.1.2"
   }
 }
