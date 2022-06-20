@@ -55,12 +55,17 @@ async function create_mailbox(page: Page, user: User): Promise<Page> {
 	await page.locator(`a[role="option"]:has-text("${config.new_domain}")`).click();
 	await page.locator('input[name="password_new"]').click();
 	await page.locator('input[name="password_new"]').fill(user.password);
-	await page.evaluate(() => document.querySelector(".action_customer_password_change").classList.remove("disabled"));
+	await page.evaluate(() => {
+		const element = document.querySelector(".action_customer_password_change")
+		if (element) element.classList.remove("disabled")
+	});
 	await page.locator('input:has-text("Postfach anlegen")').click();
 	await page.locator("text=Weitere Einstellungen vornehmen").nth(1).click();
-	await page.locator('input[name="alias_localpart"]').click();
-	await page.locator('input[name="alias_localpart"]').fill(user.kuerzel.toLowerCase());
-	await page.locator('select[name="alias_domain"]').selectOption(config.new_domain);
+	if (user.kuerzel) {
+		await page.locator('input[name="alias_localpart"]').click();
+		await page.locator('input[name="alias_localpart"]').fill(user.kuerzel.toLowerCase());
+		await page.locator('select[name="alias_domain"]').selectOption(config.new_domain);
+	}
 	await page.locator("text=Postfachgröße ändern Einklappen Ausklappen").click();
 	await page.locator('input[name="new_reserved_quota"]').fill("2");
 	await page.locator('input:has-text("Speichern")').click();
@@ -93,7 +98,7 @@ async function main() {
 	const { browser, page } = await start_script();
 
 	for await (const user of users) {
-		const vorhanden = existing.find(e => e.kuerzel === user.kuerzel);
+		const vorhanden = existing.find(e => (e.name === user.name));
 		if (vorhanden) {
 			console.log(user.name, "skipped");
 		} else {
