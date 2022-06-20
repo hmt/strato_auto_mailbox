@@ -10,7 +10,7 @@ const config = JSON.parse(json_config);
 type User = { name: string; kuerzel: string; old_mail: string; username: string; password: string; new_mail: string };
 
 function generatePassword() {
-	return Array(12)
+	return Array(18)
 		.fill("23456789ABCDEFGHKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz!#$%*+-/=?")
 		.map(function (x) {
 			return x[crypto.randomInt(0, 10_000) % x.length];
@@ -59,7 +59,7 @@ async function create_mailbox(page: Page, user: User): Promise<Page> {
 	await page.locator('input:has-text("Postfach anlegen")').click();
 	await page.locator("text=Weitere Einstellungen vornehmen").nth(1).click();
 	await page.locator('input[name="alias_localpart"]').click();
-	await page.locator('input[name="alias_localpart"]').fill(user.kuerzel);
+	await page.locator('input[name="alias_localpart"]').fill(user.kuerzel.toLowerCase());
 	await page.locator('select[name="alias_domain"]').selectOption(config.new_domain);
 	await page.locator("text=Postfachgröße ändern Einklappen Ausklappen").click();
 	await page.locator('input[name="new_reserved_quota"]').fill("2");
